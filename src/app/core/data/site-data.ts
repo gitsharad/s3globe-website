@@ -32,6 +32,7 @@ export interface PortfolioItem {
   solution: string;
   tech: string[];
   isFlagship: boolean;
+  image?: string;
 }
 
 export interface Testimonial {
@@ -55,9 +56,9 @@ export const SITE = {
   name: 'S3 Globe Web Solutions',
   tagline: 'Solutions Serve Success',
   domain: 's3globe.in',
-  email: 'ssspawar25@gmail.com',
-  phone: '+91 00000 00000',
-  whatsapp: '910000000000',
+  email: 'info@s3globe.in',
+  phone: '+91 70287 78825',
+  whatsapp: '917028778825',
 };
 
 export const SERVICES: ServiceItem[] = [
@@ -165,6 +166,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     solution: 'A voice-first OPD workflow that captures consultation notes and patient records hands-free, cutting documentation time.',
     tech: ['Angular', 'Node.js', 'MongoDB', 'AI Speech'],
     isFlagship: true,
+    image: '/portfolio/voiceopd-banner.png',
   },
   {
     title: 'SmartSheti',
@@ -174,6 +176,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     solution: 'A unified platform for crop tracking, resource planning, and actionable farm insights.',
     tech: ['Angular', 'Node.js', 'MongoDB'],
     isFlagship: true,
+    image: '/portfolio/smartsheti.png',
   },
   {
     title: 'Manufacturing ERP',
