@@ -1,0 +1,181 @@
+<!-- Intro -->
+<section class="relative overflow-hidden pb-16 pt-40 sm:pt-48">
+  <div class="pointer-events-none absolute -left-24 top-10 h-96 w-96 rounded-full bg-brand-blue/20 blur-[100px]"></div>
+  <div class="container-px relative mx-auto max-w-4xl text-center">
+    <span class="reveal inline-flex items-center gap-2 rounded-full border border-brand-cyan/30 bg-brand-cyan/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-cyan">
+      Let's Talk
+    </span>
+    <h1 class="reveal mt-6 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">
+      Get a Free <span class="text-gradient">Consultation</span>
+    </h1>
+    <p class="reveal mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+      Tell us about your project and we'll get back to you within one business day — no obligation, just clear next steps.
+    </p>
+  </div>
+</section>
+
+<!-- Form + info -->
+<section class="container-px mx-auto max-w-6xl pb-24">
+  <div class="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_1.4fr]">
+    <!-- Contact info -->
+    <div class="reveal flex flex-col gap-5">
+      <div class="glass rounded-2xl p-7">
+        <h2 class="text-base font-bold text-heading">Contact Details</h2>
+        <ul class="mt-5 flex flex-col gap-4 text-sm">
+          <li class="flex items-center gap-3">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20 text-brand-cyan">
+              <app-icon name="phone" class="h-4 w-4" />
+            </span>
+            <a [href]="'tel:' + site.phone" class="text-body hover:text-brand-cyan">{{ site.phone }}</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20 text-brand-cyan">
+              <app-icon name="mail" class="h-4 w-4" />
+            </span>
+            <a [href]="'mailto:' + site.email" class="text-body hover:text-brand-cyan">{{ site.email }}</a>
+          </li>
+          <li class="flex items-center gap-3">
+            <span class="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20 text-brand-cyan">
+              <app-icon name="map-pin" class="h-4 w-4" />
+            </span>
+            <span class="text-body">{{ site.domain }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <a
+        [href]="'https://wa.me/' + site.whatsapp"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="glass flex items-center gap-4 rounded-2xl p-7 transition-colors hover:border-[#25D366]/50"
+      >
+        <span class="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[#25D366] text-white">
+          <app-icon name="message-circle" class="h-5 w-5" />
+        </span>
+        <span>
+          <span class="block text-sm font-bold text-heading">Chat on WhatsApp</span>
+          <span class="block text-xs text-muted">Usually replies within a few hours</span>
+        </span>
+      </a>
+
+      <div class="glass rounded-2xl p-7">
+        <h2 class="text-base font-bold text-heading">Business Hours</h2>
+        <p class="mt-3 text-sm text-body">Monday – Saturday</p>
+        <p class="text-sm text-body">10:00 AM – 7:00 PM IST</p>
+      </div>
+    </div>
+
+    <!-- Form -->
+    <div class="reveal glass rounded-2xl p-7 sm:p-9">
+      @if (state() === 'success') {
+        <div class="flex flex-col items-center py-10 text-center">
+          <div class="grid h-16 w-16 place-items-center rounded-full bg-brand-cyan/10 text-brand-cyan">
+            <app-icon name="check-circle" class="h-8 w-8" />
+          </div>
+          <h2 class="mt-5 text-xl font-bold text-heading">Message Sent!</h2>
+          <p class="mt-2 max-w-sm text-sm text-muted">
+            Thanks for reaching out — we'll get back to you within one business day.
+          </p>
+          <button type="button" (click)="state.set('idle')" class="btn-secondary mt-6 !px-6 !py-2.5 text-sm">
+            Send Another Message
+          </button>
+        </div>
+      } @else {
+        <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+          <div class="grid grid-cols-1 gap-5 sm:grid-cols-2">
+            <div>
+              <label for="name" class="text-xs font-semibold uppercase tracking-wide text-muted">Full Name *</label>
+              <input
+                id="name"
+                type="text"
+                formControlName="name"
+                placeholder="Your name"
+                class="mt-2 w-full rounded-xl border border-subtle bg-white/5 px-4 py-3 text-sm text-heading placeholder:text-faint focus:border-brand-cyan/60 focus:outline-none"
+              />
+              @if (f.name.invalid && f.name.touched) {
+                <p class="mt-1.5 text-xs text-red-400">Please enter your name.</p>
+              }
+            </div>
+
+            <div>
+              <label for="email" class="text-xs font-semibold uppercase tracking-wide text-muted">Email *</label>
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="you@company.com"
+                class="mt-2 w-full rounded-xl border border-subtle bg-white/5 px-4 py-3 text-sm text-heading placeholder:text-faint focus:border-brand-cyan/60 focus:outline-none"
+              />
+              @if (f.email.invalid && f.email.touched) {
+                <p class="mt-1.5 text-xs text-red-400">Please enter a valid email.</p>
+              }
+            </div>
+
+            <div>
+              <label for="phone" class="text-xs font-semibold uppercase tracking-wide text-muted">Phone</label>
+              <input
+                id="phone"
+                type="tel"
+                formControlName="phone"
+                placeholder="+91 00000 00000"
+                class="mt-2 w-full rounded-xl border border-subtle bg-white/5 px-4 py-3 text-sm text-heading placeholder:text-faint focus:border-brand-cyan/60 focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label for="projectType" class="text-xs font-semibold uppercase tracking-wide text-muted">Project Type *</label>
+              <select
+                id="projectType"
+                formControlName="projectType"
+                class="mt-2 w-full rounded-xl border border-subtle bg-white/5 px-4 py-3 text-sm text-heading focus:border-brand-cyan/60 focus:outline-none"
+              >
+                <option value="" disabled class="bg-navy-800">Select a service</option>
+                @for (type of projectTypes; track type) {
+                  <option [value]="type" class="bg-navy-800">{{ type }}</option>
+                }
+              </select>
+              @if (f.projectType.invalid && f.projectType.touched) {
+                <p class="mt-1.5 text-xs text-red-400">Please select a project type.</p>
+              }
+            </div>
+
+            <div class="sm:col-span-2">
+              <label for="message" class="text-xs font-semibold uppercase tracking-wide text-muted">Project Details *</label>
+              <textarea
+                id="message"
+                rows="5"
+                formControlName="message"
+                placeholder="Tell us about your project, timeline, and budget..."
+                class="mt-2 w-full resize-none rounded-xl border border-subtle bg-white/5 px-4 py-3 text-sm text-heading placeholder:text-faint focus:border-brand-cyan/60 focus:outline-none"
+              ></textarea>
+              @if (f.message.invalid && f.message.touched) {
+                <p class="mt-1.5 text-xs text-red-400">Please add a few more details (at least 10 characters).</p>
+              }
+            </div>
+
+            <!-- Honeypot — hidden from real users, left empty; bots that auto-fill every field trip this. -->
+            <div class="absolute left-[-9999px]" aria-hidden="true">
+              <label for="company">Company</label>
+              <input id="company" type="text" formControlName="company" tabindex="-1" autocomplete="off" />
+            </div>
+          </div>
+
+          @if (state() === 'error') {
+            <p class="mt-5 rounded-xl border border-red-400/30 bg-red-400/10 px-4 py-3 text-sm text-red-300">
+              {{ errorMessage() }}
+            </p>
+          }
+
+          <button type="submit" class="btn-primary mt-7 w-full sm:w-auto" [disabled]="state() === 'submitting'">
+            @if (state() === 'submitting') {
+              Sending...
+            } @else {
+              Send Message
+              <app-icon name="send" class="h-4 w-4" />
+            }
+          </button>
+        </form>
+      }
+    </div>
+  </div>
+</section>

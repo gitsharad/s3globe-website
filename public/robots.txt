@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://s3globe.in/sitemap.xml

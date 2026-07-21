@@ -1,0 +1,54 @@
+<!-- Intro -->
+<section class="relative overflow-hidden pb-16 pt-40 sm:pt-48">
+  <div class="pointer-events-none absolute -left-24 top-10 h-96 w-96 rounded-full bg-brand-cyan/20 blur-[100px]"></div>
+  <div class="container-px relative mx-auto max-w-4xl text-center">
+    <span class="reveal inline-flex items-center gap-2 rounded-full border border-brand-cyan/30 bg-brand-cyan/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-cyan">
+      Our Stack
+    </span>
+    <h1 class="reveal mt-6 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">
+      Technologies We <span class="text-gradient">Work With</span>
+    </h1>
+    <p class="reveal mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+      We pick the right tool for the job — not the trendiest one — across frontend, backend, data, cloud, and AI.
+    </p>
+  </div>
+</section>
+
+<!-- Groups -->
+<section class="container-px mx-auto max-w-6xl pb-24">
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2">
+    @for (group of techGroups; track group.name) {
+      <div class="glass reveal rounded-2xl p-8">
+        <div class="flex items-center gap-3">
+          <div class="grid h-11 w-11 place-items-center rounded-xl bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20 text-brand-cyan">
+            <app-icon [name]="group.icon" class="h-5 w-5" />
+          </div>
+          <h2 class="text-lg font-bold text-heading">{{ group.name }}</h2>
+        </div>
+        <ul class="mt-5 flex flex-wrap gap-2.5">
+          @for (item of group.items; track item) {
+            <li class="rounded-full border border-subtle px-3.5 py-1.5 text-sm text-body">{{ item }}</li>
+          }
+        </ul>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="container-px mx-auto max-w-7xl pb-24">
+  <div class="reveal glass relative overflow-hidden rounded-3xl px-8 py-16 text-center sm:px-16">
+    <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand-cyan/20 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-brand-blue/20 blur-3xl"></div>
+    <h2 class="relative text-3xl font-extrabold tracking-tight text-heading sm:text-4xl">Have a Preferred Stack?</h2>
+    <p class="relative mx-auto mt-4 max-w-xl text-base text-muted">
+      We're flexible — tell us your constraints and we'll work within them, or recommend what fits best.
+    </p>
+    <div class="relative mt-8">
+      <a routerLink="/contact" class="btn-primary">
+        Get Free Consultation
+        <app-icon name="arrow-right" class="h-4 w-4" />
+      </a>
+    </div>
+  </div>
+</section>

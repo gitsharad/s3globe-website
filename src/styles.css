@@ -1,0 +1,141 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+
+[id] {
+  scroll-margin-top: 6.5rem;
+}
+
+body {
+  @apply bg-navy-900 text-slate-200 font-sans antialiased;
+}
+
+body.light {
+  @apply bg-slate-50 text-slate-800;
+}
+
+::selection {
+  @apply bg-brand-blue/40 text-white;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-navy-900;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-brand-blue/50 rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-brand-blue/80;
+}
+
+.container-px {
+  @apply px-6 sm:px-8 lg:px-12;
+}
+
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10;
+}
+
+body.light .glass {
+  @apply bg-white/70 border-slate-200;
+}
+
+.text-gradient {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-blue via-brand-cyan to-brand-violet;
+}
+
+/* Semantic theme tokens — use these instead of raw text-white/text-slate-* so
+   every page gets correct contrast in both dark and light mode automatically. */
+.text-heading {
+  @apply text-white;
+}
+body.light .text-heading {
+  @apply text-slate-900;
+}
+
+.text-body {
+  @apply text-slate-300;
+}
+body.light .text-body {
+  @apply text-slate-600;
+}
+
+.text-muted {
+  @apply text-slate-400;
+}
+body.light .text-muted {
+  @apply text-slate-500;
+}
+
+.text-faint {
+  @apply text-slate-500;
+}
+body.light .text-faint {
+  @apply text-slate-400;
+}
+
+.border-subtle {
+  @apply border-white/10;
+}
+body.light .border-subtle {
+  @apply border-slate-200;
+}
+
+.surface-alt {
+  @apply bg-navy-800;
+}
+body.light .surface-alt {
+  @apply bg-white;
+}
+
+.hover-surface {
+  @apply hover:bg-white/5;
+}
+body.light .hover-surface {
+  @apply hover:bg-slate-100;
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-brand-blue to-brand-cyan px-7 py-3.5 font-semibold text-white shadow-glow transition-transform duration-300 hover:scale-105 hover:shadow-glow-cyan;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 font-semibold text-slate-100 backdrop-blur-xl transition-all duration-300 hover:border-brand-cyan/60 hover:bg-white/10;
+}
+
+body.light .btn-secondary {
+  @apply border-slate-300 bg-white text-slate-700 hover:border-brand-blue/50;
+}
+
+/* Pure-CSS entrance animation — deliberately not gated on IntersectionObserver/
+   scroll-position JS, since those can be throttled or never fire in backgrounded
+   or automated browser contexts, permanently hiding content. This always runs. */
+@keyframes reveal-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  animation: reveal-in 0.7s ease-out both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    animation: none;
+  }
+}

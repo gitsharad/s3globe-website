@@ -1,0 +1,22 @@
+<div class="mx-auto flex max-w-3xl flex-col gap-3">
+  @for (item of items(); track item.question; let i = $index) {
+    <div class="glass reveal overflow-hidden rounded-2xl">
+      <button
+        type="button"
+        (click)="toggle(i)"
+        class="flex w-full items-center justify-between gap-4 px-6 py-5 text-left"
+      >
+        <span class="text-sm font-semibold text-heading sm:text-base">{{ item.question }}</span>
+        <app-icon
+          [name]="openIndex() === i ? 'chevron-up' : 'chevron-down'"
+          class="h-5 w-5 shrink-0 text-brand-cyan"
+        />
+      </button>
+      @if (openIndex() === i) {
+        <div class="px-6 pb-5 text-sm leading-relaxed text-muted">
+          {{ item.answer }}
+        </div>
+      }
+    </div>
+  }
+</div>

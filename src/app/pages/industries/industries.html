@@ -1,0 +1,47 @@
+<!-- Intro -->
+<section class="relative overflow-hidden pb-16 pt-40 sm:pt-48">
+  <div class="pointer-events-none absolute -right-24 top-10 h-96 w-96 rounded-full bg-brand-blue/20 blur-[100px]"></div>
+  <div class="container-px relative mx-auto max-w-4xl text-center">
+    <span class="reveal inline-flex items-center gap-2 rounded-full border border-brand-cyan/30 bg-brand-cyan/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-cyan">
+      Who We Work With
+    </span>
+    <h1 class="reveal mt-6 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">
+      Industries We <span class="text-gradient">Serve</span>
+    </h1>
+    <p class="reveal mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+      Every industry has different workflows and compliance needs — we build software that fits how you actually operate.
+    </p>
+  </div>
+</section>
+
+<!-- Grid -->
+<section class="container-px mx-auto max-w-6xl pb-24">
+  <div class="grid grid-cols-2 gap-5 sm:grid-cols-3 lg:grid-cols-5">
+    @for (industry of industries; track industry.name) {
+      <div class="glass reveal flex flex-col items-center gap-3 rounded-2xl p-6 text-center transition-transform hover:-translate-y-1">
+        <div class="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-brand-blue/20 to-brand-cyan/20 text-brand-cyan">
+          <app-icon [name]="industry.icon" class="h-6 w-6" />
+        </div>
+        <h3 class="text-sm font-semibold text-heading">{{ industry.name }}</h3>
+      </div>
+    }
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="container-px mx-auto max-w-7xl pb-24">
+  <div class="reveal glass relative overflow-hidden rounded-3xl px-8 py-16 text-center sm:px-16">
+    <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand-cyan/20 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-brand-blue/20 blur-3xl"></div>
+    <h2 class="relative text-3xl font-extrabold tracking-tight text-heading sm:text-4xl">Don't See Your Industry?</h2>
+    <p class="relative mx-auto mt-4 max-w-xl text-base text-muted">
+      We work across far more than what's listed here — tell us about your business and we'll show you how we can help.
+    </p>
+    <div class="relative mt-8">
+      <a routerLink="/contact" class="btn-primary">
+        Get Free Consultation
+        <app-icon name="arrow-right" class="h-4 w-4" />
+      </a>
+    </div>
+  </div>
+</section>

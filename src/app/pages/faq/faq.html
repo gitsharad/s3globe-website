@@ -1,0 +1,38 @@
+<!-- Intro -->
+<section class="relative overflow-hidden pb-16 pt-40 sm:pt-48">
+  <div class="pointer-events-none absolute -left-24 top-10 h-96 w-96 rounded-full bg-brand-violet/20 blur-[100px]"></div>
+  <div class="container-px relative mx-auto max-w-4xl text-center">
+    <span class="reveal inline-flex items-center gap-2 rounded-full border border-brand-cyan/30 bg-brand-cyan/5 px-4 py-1.5 text-xs font-semibold uppercase tracking-widest text-brand-cyan">
+      Got Questions?
+    </span>
+    <h1 class="reveal mt-6 text-4xl font-extrabold tracking-tight text-heading sm:text-5xl">
+      Frequently Asked <span class="text-gradient">Questions</span>
+    </h1>
+    <p class="reveal mx-auto mt-6 max-w-2xl text-base leading-relaxed text-muted sm:text-lg">
+      Everything you need to know before starting a project with us. Don't see your question? Just ask.
+    </p>
+  </div>
+</section>
+
+<!-- FAQ list -->
+<section class="container-px mx-auto max-w-5xl pb-24">
+  <app-faq-accordion [items]="faqs" />
+</section>
+
+<!-- CTA -->
+<section class="container-px mx-auto max-w-7xl pb-24">
+  <div class="reveal glass relative overflow-hidden rounded-3xl px-8 py-16 text-center sm:px-16">
+    <div class="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-brand-cyan/20 blur-3xl"></div>
+    <div class="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-brand-blue/20 blur-3xl"></div>
+    <h2 class="relative text-3xl font-extrabold tracking-tight text-heading sm:text-4xl">Still Have Questions?</h2>
+    <p class="relative mx-auto mt-4 max-w-xl text-base text-muted">
+      Reach out and we'll get back to you within one business day.
+    </p>
+    <div class="relative mt-8">
+      <a routerLink="/contact" class="btn-primary">
+        Contact Us
+        <app-icon name="arrow-right" class="h-4 w-4" />
+      </a>
+    </div>
+  </div>
+</section>

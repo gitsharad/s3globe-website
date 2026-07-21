@@ -1,0 +1,23 @@
+<div class="glass reveal flex h-full flex-col rounded-2xl p-7">
+  <app-icon name="quote" class="h-8 w-8 text-brand-cyan/40" />
+  <div class="mt-4 flex gap-1">
+    @for (star of stars; track $index) {
+      <app-icon
+        name="star"
+        class="h-4 w-4"
+        [class.text-brand-cyan]="$index < testimonial().rating"
+        [class.text-faint]="$index >= testimonial().rating"
+      />
+    }
+  </div>
+  <p class="mt-4 flex-1 text-sm leading-relaxed text-body">&ldquo;{{ testimonial().quote }}&rdquo;</p>
+  <div class="mt-6 flex items-center gap-3 border-t border-subtle pt-5">
+    <div class="grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-brand-blue to-brand-cyan text-sm font-bold text-white">
+      {{ testimonial().name.charAt(0) }}
+    </div>
+    <div>
+      <p class="text-sm font-semibold text-heading">{{ testimonial().name }}</p>
+      <p class="text-xs text-muted">{{ testimonial().role }}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,81 @@
+<header
+  class="fixed inset-x-0 top-0 z-50 transition-all duration-300"
+  [class.glass]="scrolled() || mobileOpen()"
+  [class.py-2]="scrolled() || mobileOpen()"
+  [class.py-5]="!scrolled() && !mobileOpen()"
+>
+  <nav class="container-px mx-auto flex max-w-7xl items-center justify-between">
+    <a routerLink="/" (click)="closeMobile()" class="flex items-center gap-2.5 shrink-0">
+      <span class="grid h-9 w-9 place-items-center rounded-xl bg-gradient-to-br from-brand-blue to-brand-cyan font-extrabold text-white shadow-glow">S3</span>
+      <span class="flex flex-col leading-tight">
+        <span class="text-sm font-bold tracking-tight sm:text-base">S3 Globe</span>
+        <span class="text-[10px] font-medium uppercase tracking-widest text-brand-cyan">Web Solutions</span>
+      </span>
+    </a>
+
+    <div class="hidden items-center gap-1 lg:flex">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="link.path"
+          routerLinkActive="text-brand-cyan bg-white/5"
+          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+          class="rounded-full px-4 py-2 text-sm font-medium text-body transition-colors hover:bg-white/5 hover:text-heading"
+        >
+          {{ link.label }}
+        </a>
+      }
+    </div>
+
+    <div class="hidden items-center gap-3 lg:flex">
+      <button
+        type="button"
+        (click)="themeService.toggle()"
+        class="grid h-10 w-10 place-items-center rounded-full border border-subtle text-body transition-colors hover:border-brand-cyan/50 hover:text-heading"
+        aria-label="Toggle theme"
+      >
+        <app-icon [name]="themeService.theme() === 'dark' ? 'sun' : 'moon'" class="h-4 w-4" />
+      </button>
+      <a routerLink="/contact" class="btn-primary !px-5 !py-2.5 text-sm">
+        Get Free Consultation
+      </a>
+    </div>
+
+    <button
+      type="button"
+      class="grid h-10 w-10 place-items-center rounded-full border border-subtle text-body lg:hidden"
+      (click)="toggleMobile()"
+      aria-label="Toggle menu"
+    >
+      <app-icon [name]="mobileOpen() ? 'x' : 'menu'" class="h-5 w-5" />
+    </button>
+  </nav>
+
+  @if (mobileOpen()) {
+    <div class="container-px mx-auto mt-4 flex max-w-7xl flex-col gap-1 border-t border-subtle pb-4 pt-4 lg:hidden">
+      @for (link of links; track link.path) {
+        <a
+          [routerLink]="link.path"
+          (click)="closeMobile()"
+          routerLinkActive="text-brand-cyan bg-white/5"
+          [routerLinkActiveOptions]="{ exact: link.path === '/' }"
+          class="rounded-xl px-4 py-3 text-sm font-medium text-body hover:bg-white/5"
+        >
+          {{ link.label }}
+        </a>
+      }
+      <div class="mt-2 flex items-center gap-3 px-4">
+        <button
+          type="button"
+          (click)="themeService.toggle()"
+          class="grid h-10 w-10 place-items-center rounded-full border border-subtle text-body"
+          aria-label="Toggle theme"
+        >
+          <app-icon [name]="themeService.theme() === 'dark' ? 'sun' : 'moon'" class="h-4 w-4" />
+        </button>
+        <a routerLink="/contact" (click)="closeMobile()" class="btn-primary flex-1 !px-5 !py-2.5 text-sm">
+          Get Free Consultation
+        </a>
+      </div>
+    </div>
+  }
+</header>
