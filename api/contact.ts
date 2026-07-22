@@ -15,15 +15,15 @@ const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 // password-reset emails (backend/controllers/auth.controller.js) — free tier,
 // HTTPS-only, works fine from a Vercel serverless function.
 async function sendContactEmail(body: Required<Pick<ContactBody, 'name' | 'email' | 'projectType' | 'message'>> & { phone: string }) {
-  const mjApiKey = process.env.MAILJET_API_KEY;
-  const mjSecretKey = process.env.MAILJET_SECRET_KEY;
+  const mjApiKey = process.env['MAILJET_API_KEY'];
+  const mjSecretKey = process.env['MAILJET_SECRET_KEY'];
   if (!mjApiKey || !mjSecretKey) {
     throw new Error('MAILJET_API_KEY / MAILJET_SECRET_KEY not set');
   }
 
-  const fromEmail = process.env.EMAIL_FROM_ADDRESS || 'ssspawar25@gmail.com';
-  const fromName = process.env.EMAIL_FROM_NAME || 'S3 Globe Web Solutions';
-  const toEmail = process.env.CONTACT_TO_ADDRESS || fromEmail;
+  const fromEmail = process.env['EMAIL_FROM_ADDRESS'] || 'ssspawar25@gmail.com';
+  const fromName = process.env['EMAIL_FROM_NAME'] || 'S3 Globe Web Solutions';
+  const toEmail = process.env['CONTACT_TO_ADDRESS'] || fromEmail;
 
   const credentials = Buffer.from(`${mjApiKey}:${mjSecretKey}`).toString('base64');
 
