@@ -37,6 +37,24 @@
     </div>
   </div>
 
+  <!-- Services carousel -->
+  <div class="reveal relative mt-16 overflow-hidden [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+    <div class="flex w-max gap-4 animate-marquee hover:[animation-play-state:paused]">
+      @for (service of services; track service.anchor + '-a') {
+        <div class="glass flex shrink-0 items-center gap-2.5 rounded-full px-5 py-3">
+          <app-icon [name]="service.icon" class="h-4 w-4 text-brand-cyan" />
+          <span class="whitespace-nowrap text-sm font-medium text-body">{{ service.title }}</span>
+        </div>
+      }
+      @for (service of services; track service.anchor + '-b') {
+        <div class="glass flex shrink-0 items-center gap-2.5 rounded-full px-5 py-3" aria-hidden="true">
+          <app-icon [name]="service.icon" class="h-4 w-4 text-brand-cyan" />
+          <span class="whitespace-nowrap text-sm font-medium text-body">{{ service.title }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
   <!-- Stats strip -->
   <div class="container-px relative mx-auto mt-20 max-w-6xl">
     <div class="reveal glass grid grid-cols-2 gap-8 rounded-2xl px-8 py-10 sm:grid-cols-4">

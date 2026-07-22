@@ -34,6 +34,7 @@ module.exports = {
         'float-slower': 'float 12s ease-in-out infinite',
         'spin-slow': 'spin 20s linear infinite',
         blob: 'blob 16s ease-in-out infinite',
+        marquee: 'marquee 26s linear infinite',
       },
       keyframes: {
         float: {
@@ -44,6 +45,10 @@ module.exports = {
           '0%, 100%': { transform: 'translate(0px, 0px) scale(1)' },
           '33%': { transform: 'translate(30px, -40px) scale(1.1)' },
           '66%': { transform: 'translate(-20px, 25px) scale(0.95)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
         },
       },
     },
