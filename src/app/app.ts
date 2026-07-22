@@ -1,6 +1,7 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { filter, map, mergeMap } from 'rxjs/operators';
+import { TopBar } from './layout/top-bar/top-bar';
 import { Navbar } from './layout/navbar/navbar';
 import { Footer } from './layout/footer/footer';
 import { WhatsappButton } from './layout/whatsapp-button/whatsapp-button';
@@ -9,7 +10,7 @@ import { ThemeService } from './core/services/theme.service';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Navbar, Footer, WhatsappButton],
+  imports: [RouterOutlet, TopBar, Navbar, Footer, WhatsappButton],
   templateUrl: './app.html',
   styleUrl: './app.css',
 })
