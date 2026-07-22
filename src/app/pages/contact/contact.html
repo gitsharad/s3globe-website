@@ -129,9 +129,9 @@
                 formControlName="projectType"
                 class="mt-2 w-full rounded-xl border border-subtle bg-white/5 px-4 py-3 text-sm text-heading focus:border-brand-cyan/60 focus:outline-none"
               >
-                <option value="" disabled class="bg-navy-800">Select a service</option>
+                <option value="" disabled class="surface-alt">Select a service</option>
                 @for (type of projectTypes; track type) {
-                  <option [value]="type" class="bg-navy-800">{{ type }}</option>
+                  <option [value]="type" class="surface-alt">{{ type }}</option>
                 }
               </select>
               @if (f.projectType.invalid && f.projectType.touched) {

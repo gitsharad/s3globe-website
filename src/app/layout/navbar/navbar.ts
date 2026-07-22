@@ -3,7 +3,7 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
 import { Icon } from '../../shared/icon/icon';
 import { BrandMark } from '../../shared/brand-mark/brand-mark';
 import { ThemeService } from '../../core/services/theme.service';
-import { SITE } from '../../core/data/site-data';
+import { SERVICES, SITE } from '../../core/data/site-data';
 
 interface NavLink {
   label: string;
@@ -19,9 +19,12 @@ interface NavLink {
 export class Navbar {
   protected readonly themeService = inject(ThemeService);
   protected readonly site = SITE;
+  protected readonly services = SERVICES;
 
   protected readonly scrolled = signal(false);
   protected readonly mobileOpen = signal(false);
+  protected readonly servicesMenuOpen = signal(false);
+  protected readonly mobileServicesOpen = signal(false);
 
   protected readonly links: NavLink[] = [
     { label: 'Home', path: '/' },
@@ -44,5 +47,18 @@ export class Navbar {
 
   closeMobile(): void {
     this.mobileOpen.set(false);
+    this.mobileServicesOpen.set(false);
+  }
+
+  openServicesMenu(): void {
+    this.servicesMenuOpen.set(true);
+  }
+
+  closeServicesMenu(): void {
+    this.servicesMenuOpen.set(false);
+  }
+
+  toggleMobileServices(): void {
+    this.mobileServicesOpen.update((v) => !v);
   }
 }
