@@ -69,7 +69,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const body = req.body as ContactBody;
+  const body = (req.body ?? {}) as ContactBody;
 
   // Honeypot: a real visitor never fills this hidden field in.
   if (body.company) {
