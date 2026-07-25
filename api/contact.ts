@@ -21,7 +21,8 @@ async function sendContactEmail(body: Required<Pick<ContactBody, 'name' | 'email
     throw new Error('MAILJET_API_KEY / MAILJET_SECRET_KEY not set');
   }
 
-  const fromEmail = process.env['EMAIL_FROM_ADDRESS'] || 'ssspawar25@gmail.com';
+  const fromEmail = process.env['EMAIL_FROM_ADDRESS'];
+  if (!fromEmail) throw new Error('EMAIL_FROM_ADDRESS not set');
   const fromName = process.env['EMAIL_FROM_NAME'] || 'S3 Globe Web Solutions';
   const toEmail = process.env['CONTACT_TO_ADDRESS'] || fromEmail;
 
