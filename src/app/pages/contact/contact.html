@@ -153,10 +153,13 @@
               }
             </div>
 
-            <!-- Honeypot — hidden from real users, left empty; bots that auto-fill every field trip this. -->
-            <div class="absolute left-[-9999px]" aria-hidden="true">
-              <label for="company">Company</label>
-              <input id="company" type="text" formControlName="company" tabindex="-1" autocomplete="off" />
+            <!-- Honeypot — hidden from real users, left empty; bots that auto-fill every field trip this.
+                 Uses `hidden` (display:none) rather than off-screen positioning, and a non-suggestive
+                 label/id, so browser autofill (which targets off-screen fields named "company") doesn't
+                 silently populate it for real visitors and cause their submission to be dropped. -->
+            <div class="hidden" aria-hidden="true">
+              <label for="extra-field">Leave this field blank</label>
+              <input id="extra-field" type="text" formControlName="company" tabindex="-1" autocomplete="off" />
             </div>
           </div>
 
