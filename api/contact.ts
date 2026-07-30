@@ -11,56 +11,36 @@ interface ContactBody {
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-// Mirrors the Mailjet HTTP API pattern already proven for voiceopd's
-// password-reset emails (backend/controllers/auth.controller.js) — free tier,
-// HTTPS-only, works fine from a Vercel serverless function.
+// Web3Forms relays the notification from its own sending infrastructure —
+// no sender/domain verification or account review needed on our side, unlike
+// a traditional ESP (Mailjet) where sending "as" s3globe.in triggers fraud
+// review for a brand-new domain with no sending reputation yet.
 async function sendContactEmail(body: Required<Pick<ContactBody, 'name' | 'email' | 'projectType' | 'message'>> & { phone: string }) {
-  const mjApiKey = process.env['MAILJET_API_KEY'];
-  const mjSecretKey = process.env['MAILJET_SECRET_KEY'];
-  if (!mjApiKey || !mjSecretKey) {
-    throw new Error('MAILJET_API_KEY / MAILJET_SECRET_KEY not set');
+  const accessKey = process.env['WEB3FORMS_ACCESS_KEY'];
+  if (!accessKey) {
+    throw new Error('WEB3FORMS_ACCESS_KEY not set');
   }
 
-  const fromEmail = process.env['EMAIL_FROM_ADDRESS'];
-  if (!fromEmail) throw new Error('EMAIL_FROM_ADDRESS not set');
-  const fromName = process.env['EMAIL_FROM_NAME'] || 'S3 Globe Web Solutions';
-  const toEmail = process.env['CONTACT_TO_ADDRESS'] || fromEmail;
-
-  const credentials = Buffer.from(`${mjApiKey}:${mjSecretKey}`).toString('base64');
-
-  const res = await fetch('https://api.mailjet.com/v3.1/send', {
+  const res = await fetch('https://api.web3forms.com/submit', {
     method: 'POST',
-    headers: {
-      Authorization: `Basic ${credentials}`,
-      'Content-Type': 'application/json',
-    },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      Messages: [
-        {
-          From: { Email: fromEmail, Name: fromName },
-          To: [{ Email: toEmail, Name: 'S3 Globe Web Solutions' }],
-          ReplyTo: { Email: body.email, Name: body.name },
-          Subject: `New project inquiry from ${body.name}`,
-          TextPart: [
-            `Name: ${body.name}`,
-            `Email: ${body.email}`,
-            `Phone: ${body.phone || 'Not provided'}`,
-            `Project type: ${body.projectType}`,
-            '',
-            body.message,
-          ].join('\n'),
-        },
-      ],
+      access_key: accessKey,
+      subject: `New project inquiry from ${body.name}`,
+      from_name: 'S3 Globe Web Solutions — Contact Form',
+      replyto: body.email,
+      Name: body.name,
+      Email: body.email,
+      Phone: body.phone || 'Not provided',
+      'Project Type': body.projectType,
+      Message: body.message,
     }),
   });
 
-  if (!res.ok) {
-    const errBody = await res.json().catch(() => ({}) as Record<string, unknown>);
-    const msg =
-      (errBody as any)?.Messages?.[0]?.Errors?.[0]?.ErrorMessage ||
-      (errBody as any)?.ErrorMessage ||
-      `Mailjet API error ${res.status}`;
-    throw new Error(msg);
+  const data = (await res.json().catch(() => ({}))) as { success?: boolean; message?: string };
+
+  if (!res.ok || !data.success) {
+    throw new Error(data.message || `Web3Forms API error ${res.status}`);
   }
 }
 
