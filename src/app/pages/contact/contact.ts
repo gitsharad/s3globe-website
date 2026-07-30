@@ -6,6 +6,14 @@ import { SITE } from '../../core/data/site-data';
 
 type SubmitState = 'idle' | 'submitting' | 'success' | 'error';
 
+// Web3Forms is designed to be called directly from the browser (their
+// access key is meant to be public client-side, protected by their own
+// domain-restriction setting rather than secrecy) — proxying it through a
+// backend gets blocked by their Cloudflare bot-management challenge, since
+// a server-to-server request has no browser/JS/cookies to satisfy it.
+const WEB3FORMS_ACCESS_KEY = 'df3e5822-28ce-4344-bf52-defd561b3376';
+const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
+
 @Component({
   selector: 'app-contact',
   imports: [ReactiveFormsModule, Icon],
@@ -50,18 +58,45 @@ export class Contact {
       return;
     }
 
+    const value = this.form.getRawValue();
+
+    // Honeypot: a real visitor never fills this hidden field in. Pretend
+    // success without ever contacting Web3Forms, same as the old backend did.
+    if (value.company) {
+      this.state.set('success');
+      this.form.reset();
+      return;
+    }
+
     this.state.set('submitting');
     this.errorMessage.set('');
 
-    this.http.post<{ ok?: boolean; error?: string }>('/api/contact', this.form.getRawValue()).subscribe({
-      next: () => {
-        this.state.set('success');
-        this.form.reset();
-      },
-      error: (err) => {
-        this.state.set('error');
-        this.errorMessage.set(err?.error?.error || 'Something went wrong. Please try again or reach us on WhatsApp.');
-      },
-    });
+    this.http
+      .post<{ success?: boolean; message?: string }>(WEB3FORMS_ENDPOINT, {
+        access_key: WEB3FORMS_ACCESS_KEY,
+        subject: `New project inquiry from ${value.name}`,
+        from_name: 'S3 Globe Web Solutions — Contact Form',
+        replyto: value.email,
+        Name: value.name,
+        Email: value.email,
+        Phone: value.phone || 'Not provided',
+        'Project Type': value.projectType,
+        Message: value.message,
+      })
+      .subscribe({
+        next: (res) => {
+          if (res.success) {
+            this.state.set('success');
+            this.form.reset();
+          } else {
+            this.state.set('error');
+            this.errorMessage.set(res.message || 'Something went wrong. Please try again or reach us on WhatsApp.');
+          }
+        },
+        error: (err) => {
+          this.state.set('error');
+          this.errorMessage.set(err?.error?.message || 'Something went wrong. Please try again or reach us on WhatsApp.');
+        },
+      });
   }
 }
