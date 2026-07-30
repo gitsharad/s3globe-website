@@ -23,7 +23,11 @@ async function sendContactEmail(body: Required<Pick<ContactBody, 'name' | 'email
 
   const res = await fetch('https://api.web3forms.com/submit', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      Referer: 'https://s3globe.in/contact',
+      Origin: 'https://s3globe.in',
+    },
     body: JSON.stringify({
       access_key: accessKey,
       subject: `New project inquiry from ${body.name}`,
@@ -37,9 +41,16 @@ async function sendContactEmail(body: Required<Pick<ContactBody, 'name' | 'email
     }),
   });
 
-  const data = (await res.json().catch(() => ({}))) as { success?: boolean; message?: string };
+  const rawBody = await res.text();
+  let data: { success?: boolean; message?: string } = {};
+  try {
+    data = JSON.parse(rawBody);
+  } catch {
+    // non-JSON response, fall through with rawBody logged below
+  }
 
   if (!res.ok || !data.success) {
+    console.error('Web3Forms raw response:', res.status, rawBody);
     throw new Error(data.message || `Web3Forms API error ${res.status}`);
   }
 }
