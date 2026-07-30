@@ -98,6 +98,10 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Contact form email failed:', err);
-    return res.status(502).json({ error: 'Could not send your message right now. Please try again shortly.' });
+    // Cloudflare's free plan intercepts and replaces 502/504 responses with its
+    // own generic error page, discarding whatever the origin actually returned —
+    // so this must NOT be 502/504 or the JSON error message below never reaches
+    // the frontend. 500 is passed through untouched.
+    return res.status(500).json({ error: 'Could not send your message right now. Please try again shortly.' });
   }
 }
