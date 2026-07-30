@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Icon } from '../../shared/icon/icon';
 import { BrandMark } from '../../shared/brand-mark/brand-mark';
 import { SERVICES, SITE } from '../../core/data/site-data';
+import { VisitCounterService } from '../../core/services/visit-counter.service';
 
 @Component({
   selector: 'app-footer',
@@ -14,6 +15,11 @@ export class Footer {
   protected readonly site = SITE;
   protected readonly services = SERVICES;
   protected readonly year = new Date().getFullYear();
+  protected readonly visitCounter = inject(VisitCounterService);
+
+  constructor() {
+    this.visitCounter.init();
+  }
 
   protected readonly quickLinks = [
     { label: 'About Us', path: '/about' },

@@ -66,6 +66,9 @@
 
     <div class="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-sm text-slate-500 sm:flex-row">
       <p>&copy; {{ year }} {{ site.name }}. All rights reserved.</p>
+      @if (visitCounter.count(); as count) {
+        <p class="text-slate-500">{{ count.toLocaleString() }} visits</p>
+      }
       <p class="text-slate-500">{{ site.tagline }}</p>
     </div>
   </div>
