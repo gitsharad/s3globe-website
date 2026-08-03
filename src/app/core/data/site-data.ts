@@ -155,8 +155,9 @@ export const PROCESS_STEPS: ProcessStep[] = [
   { step: 7, title: 'Support', description: 'We provide ongoing support, updates, and maintenance.' },
 ];
 
-// Flagship projects are real, in-house products. Remaining entries are
-// placeholder sample projects — swap with real client work as it becomes available.
+// Flagship projects are real, in-house products. "Sample project —" entries
+// are placeholders — swap with real client work as it becomes available.
+// Everything else (e.g. Matching Woman) is real client work.
 export const PORTFOLIO: PortfolioItem[] = [
   {
     title: 'VoiceOPD',
@@ -177,6 +178,15 @@ export const PORTFOLIO: PortfolioItem[] = [
     tech: ['Angular', 'Node.js', 'MongoDB'],
     isFlagship: true,
     image: '/portfolio/smartsheti.png',
+  },
+  {
+    title: 'Matching Woman',
+    industry: 'Retail',
+    description: 'Shopify fabric store selling premium textiles priced and sold by the meter.',
+    problem: 'Shopify variants are priced per whole unit ("each"), but this fabric retailer sells everything by length — ₹450 to ₹2,800+ per meter across brocades, organza, velvet, chikankari, and embellished fabrics. Standard Shopify had no way to let customers select a fabric length and have the cart price it accurately.',
+    solution: 'A custom Shopify app adding true per-meter selling: a metre-selector on every product page and a cart-transform function that recalculates line-item pricing in real time based on the exact length selected, shared across the store’s themes.',
+    tech: ['Shopify', 'Shopify Functions', 'JavaScript', 'Liquid'],
+    isFlagship: false,
   },
   {
     title: 'Manufacturing ERP',
