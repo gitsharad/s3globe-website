@@ -187,6 +187,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     solution: 'A custom Shopify app adding true per-meter selling: a metre-selector on every product page and a cart-transform function that recalculates line-item pricing in real time based on the exact length selected, shared across the store’s themes.',
     tech: ['Shopify', 'Shopify Functions', 'JavaScript', 'Liquid'],
     isFlagship: false,
+    image: '/portfolio/matchingwoman.png',
   },
   {
     title: 'Manufacturing ERP',
