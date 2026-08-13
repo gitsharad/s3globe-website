@@ -209,7 +209,13 @@
       <div class="glass reveal flex h-full flex-col overflow-hidden rounded-2xl">
         @if (project.image) {
           <div class="aspect-[16/10] w-full overflow-hidden">
-            <img [src]="project.image" [alt]="project.title + ' product screenshot'" class="h-full w-full object-cover" loading="lazy" />
+            @if (project.link) {
+              <a [href]="project.link" target="_blank" rel="noopener noreferrer" [attr.aria-label]="'Visit ' + project.title">
+                <img [src]="project.image" [alt]="project.title + ' product screenshot'" class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy" />
+              </a>
+            } @else {
+              <img [src]="project.image" [alt]="project.title + ' product screenshot'" class="h-full w-full object-cover" loading="lazy" />
+            }
           </div>
         }
         <div class="flex flex-1 flex-col p-7">

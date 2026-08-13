@@ -22,7 +22,13 @@
       <div class="glass reveal flex h-full flex-col overflow-hidden rounded-2xl">
         @if (project.image) {
           <div class="aspect-[16/10] w-full overflow-hidden">
-            <img [src]="project.image" [alt]="project.title + ' product screenshot'" class="h-full w-full object-cover" loading="lazy" />
+            @if (project.link) {
+              <a [href]="project.link" target="_blank" rel="noopener noreferrer" [attr.aria-label]="'Visit ' + project.title">
+                <img [src]="project.image" [alt]="project.title + ' product screenshot'" class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy" />
+              </a>
+            } @else {
+              <img [src]="project.image" [alt]="project.title + ' product screenshot'" class="h-full w-full object-cover" loading="lazy" />
+            }
           </div>
         }
         <div class="flex flex-1 flex-col p-8">
@@ -63,15 +69,28 @@
   </p>
   <div class="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
     @for (project of sample; track project.title) {
-      <div class="glass reveal flex h-full flex-col rounded-2xl p-7">
-        <span class="text-xs font-semibold uppercase tracking-widest text-brand-cyan">{{ project.industry }}</span>
-        <h3 class="mt-2 text-lg font-bold text-heading">{{ project.title }}</h3>
-        <p class="mt-2.5 flex-1 text-sm leading-relaxed text-muted">{{ project.description }}</p>
-        <ul class="mt-5 flex flex-wrap gap-2">
-          @for (t of project.tech; track t) {
-            <li class="rounded-full border border-subtle px-2.5 py-1 text-xs text-faint">{{ t }}</li>
-          }
-        </ul>
+      <div class="glass reveal flex h-full flex-col overflow-hidden rounded-2xl">
+        @if (project.image) {
+          <div class="aspect-[16/10] w-full overflow-hidden">
+            @if (project.link) {
+              <a [href]="project.link" target="_blank" rel="noopener noreferrer" [attr.aria-label]="'Visit ' + project.title">
+                <img [src]="project.image" [alt]="project.title + ' product screenshot'" class="h-full w-full object-cover transition-transform duration-300 hover:scale-105" loading="lazy" />
+              </a>
+            } @else {
+              <img [src]="project.image" [alt]="project.title + ' product screenshot'" class="h-full w-full object-cover" loading="lazy" />
+            }
+          </div>
+        }
+        <div class="flex flex-1 flex-col p-7">
+          <span class="text-xs font-semibold uppercase tracking-widest text-brand-cyan">{{ project.industry }}</span>
+          <h3 class="mt-2 text-lg font-bold text-heading">{{ project.title }}</h3>
+          <p class="mt-2.5 flex-1 text-sm leading-relaxed text-muted">{{ project.description }}</p>
+          <ul class="mt-5 flex flex-wrap gap-2">
+            @for (t of project.tech; track t) {
+              <li class="rounded-full border border-subtle px-2.5 py-1 text-xs text-faint">{{ t }}</li>
+            }
+          </ul>
+        </div>
       </div>
     }
   </div>

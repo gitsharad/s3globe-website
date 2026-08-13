@@ -33,6 +33,7 @@ export interface PortfolioItem {
   tech: string[];
   isFlagship: boolean;
   image?: string;
+  link?: string;
 }
 
 export interface Testimonial {
@@ -168,6 +169,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     tech: ['Angular', 'Node.js', 'MongoDB', 'AI Speech'],
     isFlagship: true,
     image: '/portfolio/voiceopd-banner.png',
+    link: 'https://voiceopd.s3globe.in',
   },
   {
     title: 'SmartSheti',
@@ -178,6 +180,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     tech: ['Angular', 'Node.js', 'MongoDB'],
     isFlagship: true,
     image: '/portfolio/smartsheti.png',
+    link: 'https://smartsheti.com',
   },
   {
     title: 'Matching Woman',
@@ -188,6 +191,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     tech: ['Shopify', 'Shopify Functions', 'JavaScript', 'Liquid'],
     isFlagship: false,
     image: '/portfolio/matchingwoman.png',
+    link: 'https://matchingwoman.in',
   },
   {
     title: 'Manufacturing ERP',
