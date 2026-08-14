@@ -60,6 +60,9 @@ export const SITE = {
   email: 'info@s3globe.in',
   phone: '+91 70287 78825',
   whatsapp: '917028778825',
+  facebook: 'https://www.facebook.com/profile.php?id=61593359548480',
+  instagram: '',
+  linkedin: 'https://www.linkedin.com/company/s3-globe-web-solutions/',
 };
 
 export const SERVICES: ServiceItem[] = [
