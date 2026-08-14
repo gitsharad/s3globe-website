@@ -6,7 +6,7 @@ Create at https://www.linkedin.com/company/setup/new/
 S3 Globe Web Solutions
 
 ## LinkedIn public URL
-linkedin.com/company/s3globe-web-solutions (or closest available variant)
+linkedin.com/company/s3-globe-web-solutions/ (page ID 138323983)
 
 ## Website
 https://s3globe.in
