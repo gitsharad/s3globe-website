@@ -61,7 +61,7 @@ export const SITE = {
   phone: '+91 70287 78825',
   whatsapp: '917028778825',
   facebook: 'https://www.facebook.com/profile.php?id=61593359548480',
-  instagram: '',
+  instagram: 'https://www.instagram.com/s3globe_web_solutions/',
   linkedin: 'https://www.linkedin.com/company/s3-globe-web-solutions/',
 };
 
