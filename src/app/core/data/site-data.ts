@@ -33,6 +33,7 @@ export interface PortfolioItem {
   tech: string[];
   isFlagship: boolean;
   image?: string;
+  video?: string;
   link?: string;
 }
 
@@ -172,6 +173,7 @@ export const PORTFOLIO: PortfolioItem[] = [
     tech: ['Angular', 'Node.js', 'MongoDB', 'AI Speech'],
     isFlagship: true,
     image: '/portfolio/voiceopd-banner.png',
+    video: '/portfolio/voiceopd-demo.mp4',
     link: 'https://voiceopd.s3globe.in',
   },
   {

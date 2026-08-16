@@ -207,7 +207,11 @@
   <div class="mt-14 grid grid-cols-1 gap-6 lg:grid-cols-3">
     @for (project of portfolio; track project.title) {
       <div class="glass reveal flex h-full flex-col overflow-hidden rounded-2xl">
-        @if (project.image) {
+        @if (project.video) {
+          <div class="aspect-[16/10] w-full overflow-hidden bg-black">
+            <video [src]="project.video" [poster]="project.image" controls preload="metadata" class="h-full w-full object-cover"></video>
+          </div>
+        } @else if (project.image) {
           <div class="aspect-[16/10] w-full overflow-hidden">
             @if (project.link) {
               <a [href]="project.link" target="_blank" rel="noopener noreferrer" [attr.aria-label]="'Visit ' + project.title">
